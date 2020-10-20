@@ -1,1 +1,1 @@
-web: gunicorn shakti.wsgi --log-file -
+web: gunicorn shaktiman.wsgi --log-file -
