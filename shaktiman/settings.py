@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shakti',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,15 @@ STATICFILES_DIRS = [
 MEDIA_URL ='/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 #django_heroku.settings(locals())
+
+
+
+#S3 BUCKETS CONFIG
+
+AWS_ACCESS_KEY_ID = 'AKIAT5EROJKBL27C5RYK'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'rishabhgupta-shaktiman-bucket'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
