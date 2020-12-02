@@ -1,113 +1,105 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-<head>
-  <title>Ecom</title>
+  <head>
+    <title>Jimm</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"
+    />
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
 
-  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
 
-  <script type="text/javascript">
-      var user = '{{request.user}}'
+  </head>
+  <body>
+  <div class="container">
 
-// we can send our data to the views.py with the help of csrf token and that's what we create here
-      function getToken(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = getToken('csrftoken')
+  </div>
+    <table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%"  bgcolor="#f6f6ef">
+        <tr><td bgcolor="#ff6600"><table id="hnmain" border="0" cellpadding="0" cellspacing="0"  width="100%" style="padding:2px"><tr><td style="width:18px;padding-right:4px"><a href="https://news.ycombinator.com"><img src="y18.gif" width="18" height="18" style="border:1px white solid;"></a></td>
+                  <td style="line-height:12pt; height:10px;"><span class="pagetop"><b class="hnname"><a id="hello" href="#">Jimm</a></b>
+                    {% if user.is_authenticated %}
+                      <a id="hello" href="{% url 'owner:index' %}">Add Member</a> | <a id="hello" href="{% url 'owner:view_members' %}">View Members</a> | <a id="hello" href="{% url 'owner:enquiry' %}">Add Enquiry</a> | <a id="hello" href="{% url 'owner:showenq' %}">Show Enquiry</a> | <a id="hello" href="{% url 'owner:notification' %}">Notifications</a>             </span></td>
+                      <td style="text-align:right;padding-right:4px;"><span class="pagetop">
+                              <a id="hello" href="{% url 'owner:logout_user' %}">logout</a></span></td>
+                    {% else %}
+                              <td style="text-align:right;padding-right:4px;"><span class="pagetop">
+                                      <a id="hello" href="{% url 'owner:login_user' %}">login</a> | <a id="hello" href="{% url 'owner:signup' %}">Register</a></span></td>
 
-
-
-//this function is used to grab the cookie from the application
-// this function gives us cookie from the browser
-    function getCookie(name) {
-        // Split cookie string and get all individual name=value pairs in an array
-        var cookieArr = document.cookie.split(";");
-
-        // Loop through the array elements
-        for(var i = 0; i < cookieArr.length; i++) {
-            var cookiePair = cookieArr[i].split("=");
-
-            /* Removing whitespace at the beginning of the cookie name
-            and compare it with the given string */
-            if(name == cookiePair[0].trim()) {
-                // Decode the cookie value and return
-                return decodeURIComponent(cookiePair[1]);
-            }
-        }
-
-        // Return null if not found
-        return null;//if we don't have cookie it return null
-    }
-    var cart = JSON.parse(getCookie('cart'))//if it has it wil return the cookie
-
-    if (cart == undefined){//here we check if cart is undefined and if it is we will creaate one
-	      cart = {}
-	      console.log('Cart Created!', cart)
-	      document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"//this domain path means in whatever page you are you have same cookie
-    }
-    console.log('Cart:', cart)
-
-  </script>
-
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'store' %}">SHAKTIMAN</a>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-
-    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-      <!-- <ul class="navbar-nav mr-auto"> -->
-        <!-- <li class="nav-item active"> -->
-          <!-- <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only">(current)</span></a> -->
-        <!-- </li> -->
+                    {% endif %}
 
 
-      </ul>
-      <div class="form-inline my-2 my-lg-0">
-   	     	<!-- <a href="#"class="btn btn-warning">Login</a> -->
+              </tr></table></table></td></tr></div>
 
-   	     	<a class="navbar-brand mx-auto"  href="{% url 'cart' %}">
-   	    		<img  id="cart-icon" src="{% static 'images/cart.png' %}">
-   	    	</a>
-   	    	<p id="cart-total">{{cartItems}}</p>
-          <!-- cartItems value comes from views.py of def store ,basically we grab total number of item from views and paste it here -->
+    <br />
 
-   	    </div>
-   	  </div>
-   	</nav>
-     <div class="container">
-            <br>
-            {% block content %}
+    {% if messages %} {% for message in messages %}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="alert {{message.tags}} alert-dismissible" role="alert">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %} {% endif %} {% block content %} {% endblock content %}
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- <script type="text/javascript" src="{% static 'js/cart.js' %}"></script> -->
+  </body>
+  <style>
+
+  #hnmain{
+    width: 100%;
+  }
+
+  .pagetop {
+     font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#222222; line-height:12px;
+   }
 
 
-            {% endblock content %}
-         </div>
+  .hnname{
+    margin-right: 5px;
+  }
 
-
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-</body>
+  #hello{
+    color: black;
+  }
+  </style>
 </html>
+
